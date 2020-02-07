@@ -23,10 +23,11 @@ function entregUsadoFn() {
       formulario.entregaUsado.value;
   } else if (formulario.entregaUsado[1].checked) {
     document.getElementById("entregaUsado").classList.remove("open");
-    document.getElementsByName("entregaUsadoHidden")[0].value = formulario.entregaUsado.value;
-    formulario.seleccionar1.value = '';
-    formulario.seleccionar2.value = '';
-    formulario.seleccionar3.value = '';
+    document.getElementsByName("entregaUsadoHidden")[0].value =
+      formulario.entregaUsado.value;
+    formulario.seleccionar1.value = "";
+    formulario.seleccionar2.value = "";
+    formulario.seleccionar3.value = "";
   }
 }
 for (var i = 0; i < entregaUsado.length; i++) {
@@ -35,14 +36,24 @@ for (var i = 0; i < entregaUsado.length; i++) {
 
 enviar.addEventListener("click", obtenerResultados);
 
-function obtenerResultados(e) {
-  document.getElementsByName("seleccionar1").value;
-  resultado.innerHTML = `
+function validarSelect() {
+  if (formulario.seleccionar1.value === "") {
+    resultado.innerHTML = "Debes seleccionar una marca";
+  } else if (formulario.seleccionar2.value === "") {
+    resultado.innerHTML = "Debes seleccionar un modelo";
+  } else if (formulario.seleccionar3.value === "") {
+    resultado.innerHTML = "Debes seleccionar un año";
+  } else {
+    resultado.innerHTML = `
   <p> ${formulario.seleccionar1.value}</p> 
   <p> ${formulario.seleccionar2.value}</p> 
   <p> ${formulario.seleccionar3.value}</p> 
   <p> ${formulario.entregAnticipo.value}</p> 
   <p> ${formulario.entregaUsado.value} </p>`;
+  }
+}
 
+function obtenerResultados(e) {
+  validarSelect();
   e.preventDefault();
 }
